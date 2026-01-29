@@ -1,0 +1,85 @@
+.pageContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainContent {
+    flex: 1;
+    padding: 2rem 1rem;
+    background: #f8f8f8;
+}
+
+.dashboardWrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e0e0e0;
+}
+
+.sectionTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin: 0 0 2rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.settingsForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.productsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .mainContent {
+        padding: 1.5rem 0.75rem;
+    }
+
+    .section {
+        padding: 1.75rem 1.25rem;
+        border-radius: 8px;
+    }
+
+    .sectionTitle {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .mainContent {
+        padding: 1rem 0.5rem;
+    }
+
+    .section {
+        padding: 1.5rem 1rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.35rem;
+        margin-bottom: 1.25rem;
+    }
+}

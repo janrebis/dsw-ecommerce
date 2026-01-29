@@ -1,0 +1,48 @@
+.homepage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainContent {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.productGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3rem 2.5rem;
+    margin-top: 2rem;
+}
+
+.productLink {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.productLink:hover {
+    transform: translateY(-4px);
+}
+
+@media screen and (max-width: 768px) {
+    .mainContent {
+        padding: 1rem;
+    }
+
+    .productGrid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.5rem 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .productGrid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+}

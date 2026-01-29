@@ -1,0 +1,209 @@
+.pageContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.mainContent {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.deliverySection,
+.addressSection {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 2px solid #e0e0e0;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.deliveryOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.deliveryOption {
+    padding: 1.25rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.deliveryOption:hover {
+    border-color: #16ac37;
+    background: #f8fff9;
+}
+
+.deliveryOption.selected {
+    border-color: #16ac37;
+    background: #f0fdf4;
+    box-shadow: 0 0 0 3px rgba(22, 172, 55, 0.1);
+}
+
+.optionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.optionHeader h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f1f1f;
+    margin: 0;
+}
+
+.optionPrice {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #16ac37;
+}
+
+.optionEta {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #717171;
+}
+
+.addressForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.infoText {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.875rem;
+    color: #717171;
+    font-style: italic;
+}
+
+.sidebar {
+    width: 400px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.productsSummary {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 2px solid #e0e0e0;
+}
+
+.summaryTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.productsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.checkoutLink {
+    text-decoration: none;
+    display: block;
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-width: 800px;
+        position: static;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    .deliverySection,
+    .addressSection,
+    .productsSummary {
+        padding: 1.5rem;
+    }
+
+    .sectionTitle,
+    .summaryTitle {
+        font-size: 1.35rem;
+    }
+
+    .optionHeader h3 {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 1rem 0.75rem;
+    }
+
+    .deliverySection,
+    .addressSection,
+    .productsSummary {
+        padding: 1.25rem;
+        border-radius: 8px;
+    }
+
+    .sectionTitle,
+    .summaryTitle {
+        font-size: 1.25rem;
+    }
+
+    .deliveryOption {
+        padding: 1rem;
+    }
+
+    .optionHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}
