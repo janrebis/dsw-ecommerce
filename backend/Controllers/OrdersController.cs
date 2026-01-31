@@ -1,6 +1,8 @@
-﻿using e_commercedsw.backend.Data;
+﻿using System.Security.Claims;
+using e_commercedsw.backend.Data;
 using e_commercedsw.backend.Database;
 using e_commercedsw.backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +15,14 @@ public class OrdersController : ControllerBase
     private readonly AppDbContext _db;
     public OrdersController(AppDbContext db) => _db = db;
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateOrderDto dto)
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized(new { message = "Brak użytkownika w tokenie" });
+
         var cart = CartStore.Cart;
         if (cart.Count == 0)
             return BadRequest(new { message = "Koszyk jest pusty" });
@@ -35,6 +42,7 @@ public class OrdersController : ControllerBase
 
         var order = new OrderEntity
         {
+            UserId = userId,
             CreatedAtUtc = DateTime.UtcNow,
             DeliveryMethod = dto.DeliveryMethod,
             Address = new OrderAddress
@@ -74,23 +82,36 @@ public class OrdersController : ControllerBase
         return Ok(new { id = order.Id });
     }
 
-   
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    [Authorize]
+    [HttpGet("mine")]
+    public async Task<IActionResult> Mine()
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrWhiteSpace(userId))
+            return Unauthorized();
+
         var orders = await _db.Orders
             .Include(o => o.Items)
-            .OrderByDescending(o => o.CreatedAtUtc)
             .AsNoTracking()
+            .Where(o => o.UserId == userId)
+            .OrderByDescending(o => o.CreatedAtUtc)
             .ToListAsync();
 
         return Ok(orders.Select(o => new
         {
             id = o.Id,
-            createdAt = o.CreatedAtUtc,
+            createdAtUtc = o.CreatedAtUtc,
             deliveryMethod = o.DeliveryMethod,
             total = o.Total,
-            address = o.Address,
+            address = new
+            {
+                fullName = o.Address.FullName,
+                address = o.Address.Address,
+                postalCode = o.Address.PostalCode,
+                city = o.Address.City,
+                phone = o.Address.Phone,
+                email = o.Address.Email
+            },
             items = o.Items.Select(i => new
             {
                 productId = i.ProductId,

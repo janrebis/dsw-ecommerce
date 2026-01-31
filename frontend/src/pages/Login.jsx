@@ -4,7 +4,7 @@ import NavBar from '../components/NavBar';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
 import styles from '../styles/Login.module.css';
-
+import { authApi } from "../api/auth";
 export default function Login() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -19,10 +19,19 @@ export default function Login() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Login attempt:', formData);
-        navigate('/user_dashboard');
+        try {
+            const res = await authApi.login({
+                email: formData.emailOrUsername,
+                password: formData.password,
+            });
+            localStorage.setItem("token", res.data.token);
+            navigate("/user_dashboard");
+        } catch (err) {
+            console.error(err);
+            alert(err?.response?.data?.message ?? "Błąd logowania");
+        }
     };
 
     return (
